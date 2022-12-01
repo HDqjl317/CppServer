@@ -22,10 +22,7 @@ Socket::~Socket() {
 }
 
 void Socket::bind(InetAddress *addr){
-    errif(
-        ::bind(fd, (sockaddr*)&addr->addr, addr->addr_len) == -1, 
-        "socket bind error"
-    );
+    errif(::bind(fd, (sockaddr*)&addr->addr, addr->addr_len) == -1, "socket bind error");
 }
 
 void Socket::listen(){

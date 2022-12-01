@@ -16,6 +16,6 @@ private:
     int epfd;
     struct epoll_event *events;
 
-}
+};
 
 #endif

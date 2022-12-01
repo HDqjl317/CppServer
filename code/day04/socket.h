@@ -1,7 +1,7 @@
 #ifndef SOCKET_H
 #define SOCKET_H
 
-class inetAddress;
+class InetAddress;
 class Socket {
 
 public:
@@ -9,15 +9,15 @@ public:
     Socket(int);
     ~Socket();
 
-    void bind(inetAddress);
+    void bind(InetAddress*);
     void listen();
     void setnonblocking();
 
-    int accept(inetAddress*);
+    int accept(InetAddress*);
     int getFd();
 
 private:
     int fd;
-}
+};
 
 #endif
