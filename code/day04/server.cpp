@@ -22,12 +22,15 @@ int main() {
     InetAddress *serv_addr = new InetAddress("127.0.0.1", 8888);
     serv_sock->bind(serv_addr);
     serv_sock->listen();    
+
     Epoll *ep = new Epoll();
     serv_sock->setnonblocking();
     ep->addFd(serv_sock->getFd(), EPOLLIN | EPOLLET);
+
     while(true){
         std::vector<epoll_event> events = ep->poll();
         int nfds = events.size();
+        
         for(int i = 0; i < nfds; ++i){
             if(events[i].data.fd == serv_sock->getFd()){        //新客户端连接
                 InetAddress *clnt_addr = new InetAddress();      //会发生内存泄露！没有delete
