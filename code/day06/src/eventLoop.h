@@ -14,6 +14,6 @@ public:
 private:
     Epoll *ep;
     bool quit;
-}
+};
 
 #endif

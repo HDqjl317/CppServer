@@ -6,10 +6,12 @@ class Socket;
 
 class Server {
 public:
-    Server();
+    Server(EventLoop*);
     ~Server();
     void handleReadEvent(int);
     void newConnection(Socket *serv_sock);
 private:
     EventLoop *loop;
-}
+};
+
+#endif

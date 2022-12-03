@@ -8,7 +8,7 @@ class EventLoop;
 
 class Channel {
 public:
-    Channel(Epoll *_ep, int _fd);
+    Channel(EventLoop *_ep, int _fd);
     ~Channel();
 
     void enableReading();

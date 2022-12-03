@@ -2,13 +2,13 @@
 #include "eventLoop.h"
 
 Channel::Channel(EventLoop *_loop, int _fd)
-    : ep(_loop), fd(_fd), events(0), revents(0), inEpoll(false) {}
+    : loop(_loop), fd(_fd), events(0), revents(0), inEpoll(false) {}
 
 Channel::~Channel() {}
 
 void Channel::enableReading() {
     events = EPOLLIN | EPOLLET;
-    ep->updateChannel(this);
+    loop->updateChannel(this);
 }
 
 int Channel::getFd() {
