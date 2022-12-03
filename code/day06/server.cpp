@@ -33,7 +33,7 @@ int main() {
     while(true){
         std::vector<Channel*> activeChannels = ep->poll();
         int nfds = activeChannels.size();
-        for(int i = 0; i < nfds; ++i) {
+        for(int i = 0; i < nfds; ++i){
             int chfd = activeChannels[i]->getFd();
             if(chfd == serv_sock->getFd()){        //新客户端连接
                 InetAddress *clnt_addr = new InetAddress();      //会发生内存泄露！没有delete
