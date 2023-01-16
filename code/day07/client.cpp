@@ -6,11 +6,9 @@
 #include "src/util.h"
 
 int main() {
+    
     int sockfd = socket(AF_INET, SOCK_STREAM, 0);
-    errif(
-        sockfd == -1,
-        "socket create error"
-    );
+    errif(sockfd == -1, "socket create error");
 
     struct sockaddr_in serv_addr;
     bzero(&serv_addr, sizeof(serv_addr));
@@ -48,4 +46,5 @@ int main() {
     close(sockfd);
 
     return 0;
+
 }
