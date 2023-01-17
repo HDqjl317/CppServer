@@ -5,7 +5,7 @@
 
 class Epoll;
 class Channel;
-class ThreadPoll;
+class ThreadPool;
 
 class EventLoop {
 public:
@@ -18,7 +18,7 @@ public:
 private:
     Epoll *ep;
     bool quit;
-    ThreadPoll *threadPoll;
+    ThreadPool *threadPool;
 };
 
 #endif

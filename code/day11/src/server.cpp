@@ -19,14 +19,20 @@ Server::~Server() {
 }
 
 void Server::newConnection(Socket *sock){
-    Connection *conn = new Connection(loop, sock);
-    std::function<void(Socket*)> cb = std::bind(&Server::deleteConnection, this, std::placeholders::_1);
-    conn->setDeleteConnectionCallback(cb);
-    connections[sock->getFd()] = conn;
+    if (sock->getFd() != -1) {
+        Connection *conn = new Connection(loop, sock);
+        std::function<void(int)> cb = std::bind(&Server::deleteConnection, this, std::placeholders::_1);
+        conn->setDeleteConnectionCallback(cb);
+        connections[sock->getFd()] = conn;        
+    }
+    
 }
 
-void Server::deleteConnection(Socket * sock){
-    Connection *conn = connections[sock->getFd()];
-    connections.erase(sock->getFd());
-    delete conn;
+void Server::deleteConnection(int sockfd){
+    if (sockfd != -1) {
+        Connection *conn = connections[sockfd];
+        connections.erase(sockfd);
+        delete conn;        
+    }
+
 }

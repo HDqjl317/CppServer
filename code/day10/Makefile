@@ -10,4 +10,4 @@ clean:
 	rm server && rm client
 
 threadTest:
-	g++ -pthread src/threadPoll.cpp threadPollTest.cpp -o threadPollTest
+	g++ -pthread src/threadPool.cpp threadPo1lTest.cpp -o threadPo1lTest
