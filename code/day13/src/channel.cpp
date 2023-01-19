@@ -15,10 +15,10 @@ Channel::~Channel(){
 }
 
 void Channel::handleEvent(){
-    if(ready & (EPOLLIN | EPOLLPRI)){
+    if(ready & (EPOLLIN | EPOLLPRI)) {
         readCallback();
     }
-    if(ready & (EPOLLOUT)){
+    if(ready & (EPOLLOUT)) {
         writeCallback();
     }
 
@@ -56,6 +56,6 @@ void Channel::setReady(uint32_t _ev){
     ready = _ev;
 }
 
-void Channel::setReadCallback(std::function<void()> _cb){
+void Channel::setReadCallback(std::function<void()> const &_cb){
     readCallback = _cb;
 }

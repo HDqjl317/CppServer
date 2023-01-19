@@ -3,23 +3,16 @@
 
 #include <sys/epoll.h>
 #include <functional>
+#include "macros.h"
 
-#include <functional>
 class Socket;
 class EventLoop;
-class Channel
-{
-private:
-    EventLoop *loop;
-    int fd;
-    uint32_t events;
-    uint32_t ready;
-    bool inEpoll;
-    std::function<void()> readCallback;
-    std::function<void()> writeCallback;
+
+class Channel {
 public:
     Channel(EventLoop *_loop, int _fd);
     ~Channel();
+    DISALLOW_COPY_AND_MOVE(Channel);
 
     void handleEvent();
     void enableRead();
@@ -32,7 +25,16 @@ public:
     void useET();
 
     void setReady(uint32_t);
-    void setReadCallback(std::function<void()>);
+    void setReadCallback(std::function<void()> const &callback);
+
+private:
+    EventLoop *loop;
+    int fd;
+    uint32_t events;
+    uint32_t ready;
+    bool inEpoll;
+    std::function<void()> readCallback;
+    std::function<void()> writeCallback;
 };
 
 
